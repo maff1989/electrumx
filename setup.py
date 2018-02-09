@@ -10,7 +10,7 @@ setuptools.setup(
     # via environment variables, in which case I've tested with 15.0.4
     # "x11_hash" package (1.4) is required to sync DASH network.
     # "keccak_hash" package (1.4.2) is required to sync SMART network.
-    install_requires=['plyvel', 'pylru', 'aiohttp >= 1'],
+    install_requires=['plyvel', 'pylru', 'aiohttp >= 1', 'keccak_hash'],
     packages=setuptools.find_packages(exclude=['tests']),
     description='ElectrumX Server',
     author='Neil Booth',
