@@ -1325,3 +1325,31 @@ class Bitcore(BitcoinMixin, Coin):
     TX_PER_BLOCK = 2
     RPC_PORT = 8556
 
+class SmartCash(Coin):
+    NAME = "SmartCash"
+    SHORTNAME = "SMART"
+    NET = "mainnet"
+    BASIC_HEADER_SIZE = 80
+    STATIC_BLOCK_HEADERS = True
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("63")
+    P2SH_VERBYTES = [bytes.fromhex("18")]
+    WIF_BYTE = bytes.fromhex("80")         
+    GENESIS_HASH = ('000007acc6970b812948d14ea5a0a13d'
+                    'b0fdd07d5047c7e69101fa8b361e05a4')
+    DESERIALIZER = lib_tx.DeserializerSmartCash
+    ESTIMATE_FEE = 0.0001
+    RELAY_FEE = 0.0001
+    DAEMON = daemon.FakeEstimateFeeDaemon
+    TX_COUNT = 435857
+    TX_COUNT_HEIGHT = 185792
+    TX_PER_BLOCK = 10
+    RPC_PORT = 9679
+    REORG_LIMIT = 1000
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import keccak_hash
+        return keccak_hash.getPoWHash(header)
