@@ -1329,13 +1329,9 @@ class SmartCash(Coin):
     NAME = "SmartCash"
     SHORTNAME = "SMART"
     NET = "mainnet"
-    BASIC_HEADER_SIZE = 80
-    STATIC_BLOCK_HEADERS = True
-    XPUB_VERBYTES = bytes.fromhex("0488b21e")
-    XPRV_VERBYTES = bytes.fromhex("0488ade4")
-    P2PKH_VERBYTE = bytes.fromhex("63")
-    P2SH_VERBYTES = [bytes.fromhex("18")]
-    WIF_BYTE = bytes.fromhex("80")         
+    P2PKH_VERBYTE = bytes.fromhex("3f")
+    P2SH_VERBYTES = [bytes.fromhex("12")]
+    WIF_BYTE = bytes.fromhex("bf")          
     GENESIS_HASH = ('000007acc6970b812948d14ea5a0a13d'
                     'b0fdd07d5047c7e69101fa8b361e05a4')
     DESERIALIZER = lib_tx.DeserializerSmartCash
