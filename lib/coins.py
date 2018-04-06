@@ -1595,11 +1595,9 @@ class SmartCash(Coin):
     REORG_LIMIT = 1000
     ENCODE_CHECK = partial(Base58.encode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
     DECODE_CHECK = partial(Base58.decode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
+    HEADER_HASH = lib_tx.DeserializerSmartCash.keccak
 
     @classmethod
     def header_hash(cls, header):
         '''Given a header return the hash.'''
-        from Crypto.Hash import keccak
-        keccak_hash = keccak.new(digest_bits=256)
-        keccak_hash.update(header)
-        return keccak_hash.digest()
+        return cls.HEADER_HASH(header)
