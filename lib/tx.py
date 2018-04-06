@@ -502,4 +502,19 @@ class DeserializerDecred(Deserializer):
             locktime,
             expiry,
             witness
-        ), DeserializerDecred.blake256(no_witness_tx)        
+        ), DeserializerDecred.blake256(no_witness_tx)
+
+
+class DeserializerSmartCash(Deserializer):
+
+    @staticmethod
+    def keccak(data):
+        from Crypto.Hash import keccak
+        keccak_hash = keccak.new(digest_bits=256)
+        keccak_hash.update(data)
+        return keccak_hash.digest()
+
+    def read_tx_and_hash(self):
+        from lib.hash import sha256
+        start = self.cursor
+        return self.read_tx(), sha256(self.binary[start:self.cursor])

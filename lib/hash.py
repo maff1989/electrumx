@@ -41,7 +41,6 @@ def sha256(x):
     '''Simple wrapper of hashlib sha256.'''
     return _sha256(x).digest()
 
-
 def ripemd160(x):
     '''Simple wrapper of hashlib ripemd160.'''
     h = _new_hash('ripemd160')

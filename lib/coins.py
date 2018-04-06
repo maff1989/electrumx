@@ -1573,3 +1573,33 @@ class Axe(Dash):
         '''
         import x11_hash
         return x11_hash.getPoWHash(header)
+
+
+class SmartCash(Coin):
+    NAME = "SmartCash"
+    SHORTNAME = "SMART"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("3f")
+    P2SH_VERBYTES = [bytes.fromhex("12")]
+    WIF_BYTE = bytes.fromhex("bf")
+    GENESIS_HASH = ('000007acc6970b812948d14ea5a0a13d'
+                    'b0fdd07d5047c7e69101fa8b361e05a4')
+    DESERIALIZER = lib_tx.DeserializerSmartCash
+    ESTIMATE_FEE = 0.0001
+    RELAY_FEE = 0.0001
+    DAEMON = daemon.FakeEstimateFeeDaemon
+    TX_COUNT = 435857
+    TX_COUNT_HEIGHT = 185792
+    TX_PER_BLOCK = 10
+    RPC_PORT = 9679
+    REORG_LIMIT = 1000
+    ENCODE_CHECK = partial(Base58.encode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
+    DECODE_CHECK = partial(Base58.decode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        from Crypto.Hash import keccak
+        keccak_hash = keccak.new(digest_bits=256)
+        keccak_hash.update(header)
+        return keccak_hash.digest()
