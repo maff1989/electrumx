@@ -1,0 +1,20 @@
+COIN = SmartCash
+DAEMON_URL = http://USER:PASS@localhost:9679/
+DB_DIRECTORY = /home/electrumx/.electrumx/
+DB_ENGINE = leveldb
+USERNAME = electrumx
+ELECTRUMX = /home/electrumx/source/electrumx/electrumx_server.py
+HOST = 0.0.0.0
+
+ANON_LOGS = electrumx
+BANNER_FILE = /home/electrumx/.electrumx/banner.txt
+DONATION_ADDRESS = SdxNURtzBUMNjnUxLYy9Zs94mK7tAhEbuh
+
+CACHE_MB = 2048
+MAX_SESSIONS = 1024
+
+SSL_CERTFILE = /home/electrumx/.electrumx/server.crt
+SSL_KEYFILE = /home/electrumx/.electrumx/server.key
+
+SSL_PORT = 50002
+TCP_PORT = 50001
