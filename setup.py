@@ -9,9 +9,14 @@ setuptools.setup(
     python_requires='>=3.6',
     # via environment variables, in which case I've tested with 15.0.4
     # "x11_hash" package (1.4) is required to sync DASH network.
+<<<<<<< HEAD
     # "tribus_hash" package is required to sync Denarius network.
     # "blake256" package is required to sync Decred network.
     install_requires=['aiorpcX >= 0.4.4', 'plyvel', 'pylru', 'aiohttp >= 1'],
+=======
+    # "keccak_hash" package (1.4.2) is required to sync SMART network.
+    install_requires=['plyvel', 'pylru', 'aiohttp >= 1', 'keccak_hash'],
+>>>>>>> 2d0490e25f71207310163371b2da8a666297a191
     packages=setuptools.find_packages(exclude=['tests']),
     description='ElectrumX Server',
     author='Neil Booth',
