@@ -30,7 +30,7 @@
 
 from collections import namedtuple
 
-from lib.hash import sha256, double_sha256, hash_to_str
+from lib.hash import double_sha256, hash_to_str
 from lib.util import (cachedproperty, unpack_int32_from, unpack_int64_from,
                       unpack_uint16_from, unpack_uint32_from,
                       unpack_uint64_from)
@@ -391,7 +391,6 @@ class DeserializerTxTimeAuxPow(DeserializerTxTime):
         self.cursor = start
         return self._read_nbytes(header_end)
 
-<<<<<<< HEAD
 
 class DeserializerBitcoinAtom(DeserializerSegWit):
     FORK_BLOCK_HEIGHT = 505888
@@ -517,9 +516,5 @@ class DeserializerSmartCash(Deserializer):
 
     def read_tx_and_hash(self):
         from lib.hash import sha256
-=======
-class DeserializerSmartCash(Deserializer):
-    def read_tx_and_hash(self):
->>>>>>> 2d0490e25f71207310163371b2da8a666297a191
         start = self.cursor
         return self.read_tx(), sha256(self.binary[start:self.cursor])
