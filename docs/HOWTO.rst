@@ -70,7 +70,7 @@ Clone the ElectrumX code from a GitHub repository using git:
 
         cd ~/source
 
-        git clone https://github.com/rc125/electrumx.git
+        git clone https://github.com/SmartCash/electrum-smart-server/
 
         cd electrumx
 
