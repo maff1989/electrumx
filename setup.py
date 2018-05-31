@@ -11,8 +11,8 @@ setuptools.setup(
     # "x11_hash" package (1.4) is required to sync DASH network.
     # "tribus_hash" package is required to sync Denarius network.
     # "blake256" package is required to sync Decred network.
-    # "pycrypto" package is required to sync SmartCash network.
-    install_requires=['aiorpcX >= 0.4.4', 'plyvel', 'pylru', 'aiohttp >= 1', 'pycrypto'],
+    # "pycryptodome" package is required to sync SmartCash network.
+    install_requires=['aiorpcX >= 0.4.4', 'plyvel', 'pylru', 'aiohttp >= 1', 'pycryptodome'],
     packages=setuptools.find_packages(exclude=['tests']),
     description='ElectrumX Server',
     author='Neil Booth',
