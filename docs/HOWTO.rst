@@ -26,7 +26,7 @@ Before you start, make sure to install a full SmartCash node first and set at le
 3. Install leveldb
 ==================
 
-        sudo apt-get install python3-leveldb libleveldb-dev build-essential
+        sudo apt-get install python3-leveldb libleveldb-dev build-essential python3-pip
 
 
 4. Install Python 3.6
