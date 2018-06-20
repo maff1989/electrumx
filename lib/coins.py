@@ -44,7 +44,7 @@ from lib.script import ScriptPubKey, OpCodes
 import lib.tx as lib_tx
 from server.block_processor import BlockProcessor
 import server.daemon as daemon
-from server.session import ElectrumX, DashElectrumX
+from server.session import ElectrumX, DashElectrumX, SmartCashElectrumX
 
 
 Block = namedtuple("Block", "raw header transactions")
@@ -1585,14 +1585,16 @@ class SmartCash(Coin):
     GENESIS_HASH = ('000007acc6970b812948d14ea5a0a13d'
                     'b0fdd07d5047c7e69101fa8b361e05a4')
     DESERIALIZER = lib_tx.DeserializerSmartCash
+    RPC_PORT = 9679
+    REORG_LIMIT = 5000
     TX_COUNT = 1
     TX_COUNT_HEIGHT = 1
     TX_PER_BLOCK = 1
-    RPC_PORT = 9679
-    REORG_LIMIT = 5000
     ENCODE_CHECK = partial(Base58.encode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
     DECODE_CHECK = partial(Base58.decode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
     HEADER_HASH = lib_tx.DeserializerSmartCash.keccak
+    DAEMON = daemon.SmartCashDaemon
+    SESSIONCLS = SmartCashElectrumX
 
     @classmethod
     def header_hash(cls, header):

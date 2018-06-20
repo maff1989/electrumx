@@ -309,6 +309,15 @@ class DashDaemon(Daemon):
         '''Return the masternode status.'''
         return await self._send_single('masternodelist', params)
 
+class SmartCashDaemon(Daemon):
+
+    async def masternode_broadcast(self, params):
+        '''Broadcast a transaction to the network.'''
+        return await self._send_single('smartnodebroadcast', params)
+
+    async def masternode_list(self, params):
+        '''Return the smartnode status.'''
+        return await self._send_single('smartnodelist', params)
 
 class FakeEstimateFeeDaemon(Daemon):
     '''Daemon that simulates estimatefee and relayfee RPC calls. Coin that
