@@ -314,7 +314,7 @@ class DashDaemon(Daemon):
 class SmartCashDaemon(Daemon):
 
     async def masternode_broadcast(self, params):
-        '''Broadcast a transaction to the network.'''
+        '''Broadcast a smartnode to the network.'''
         return await self._send_single('smartnodebroadcast', params)
 
     async def masternode_list(self, params):
