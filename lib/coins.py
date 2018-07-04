@@ -1676,8 +1676,8 @@ class SmartCash(Coin):
     DESERIALIZER = lib_tx.DeserializerSmartCash
     RPC_PORT = 9679
     REORG_LIMIT = 5000
-    TX_COUNT = 1
-    TX_COUNT_HEIGHT = 1
+    TX_COUNT = 1115016
+    TX_COUNT_HEIGHT = 541656
     TX_PER_BLOCK = 1
     ENCODE_CHECK = partial(Base58.encode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
     DECODE_CHECK = partial(Base58.decode_check, hash_fn=lib_tx.DeserializerSmartCash.keccak)
