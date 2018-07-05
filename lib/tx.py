@@ -518,7 +518,7 @@ class DeserializerSmartCash(Deserializer):
 
     @staticmethod
     def keccak(data):
-        from Crypto.Hash import keccak
+        from Cryptodome.Hash import keccak
         keccak_hash = keccak.new(digest_bits=256)
         keccak_hash.update(data)
         return keccak_hash.digest()

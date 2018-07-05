@@ -12,8 +12,8 @@ setuptools.setup(
     # "tribus_hash" package is required to sync Denarius network.
     # "blake256" package is required to sync Decred network.
     # "xevan_hash" package is required to sync Xuez network.
-    # "pycryptodome" package is required to sync SmartCash network.
-    install_requires=['aiorpcX >= 0.5.6', 'plyvel', 'pylru', 'aiohttp >= 1', 'pycryptodome' ],
+    # "pycryptodomex" package is required to sync SmartCash network.
+    install_requires=['aiorpcX >= 0.5.6', 'plyvel', 'pylru', 'aiohttp >= 1', 'pycryptodomex' ],
     packages=setuptools.find_packages(exclude=['tests']),
     description='ElectrumX Server',
     author='Neil Booth',
