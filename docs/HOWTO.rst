@@ -26,7 +26,7 @@ Before you start, make sure to install a full SmartCash node first and set at le
 3. Install leveldb
 ==================
 
-        sudo apt-get install python3-leveldb libleveldb-dev
+        sudo apt-get install python3-leveldb libleveldb-dev build-essential python3-pip
 
 
 4. Install Python 3.6
@@ -70,7 +70,7 @@ Clone the ElectrumX code from a GitHub repository using git:
 
         cd ~/source
 
-        git clone https://github.com/rc125/electrumx.git
+        git clone https://github.com/SmartCash/electrum-smart-server/
 
         cd electrumx
 
