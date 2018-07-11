@@ -9,16 +9,16 @@
 
 import asyncio
 import itertools
+import logging
 import time
 from collections import defaultdict
 
 from lib.hash import hash_to_str, hex_str_to_hash
-import lib.util as util
 from server.daemon import DaemonError
 from server.db import UTXO
 
 
-class MemPool(util.LoggedClass):
+class MemPool(object):
     '''Representation of the daemon's mempool.
 
     Updated regularly in caught-up state.  Goal is to enable efficient
@@ -33,7 +33,7 @@ class MemPool(util.LoggedClass):
     '''
 
     def __init__(self, bp, controller):
-        super().__init__()
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.daemon = bp.daemon
         self.controller = controller
         self.coin = bp.coin
@@ -176,7 +176,8 @@ class MemPool(util.LoggedClass):
                     txin_pairs, txout_pairs, tx_fee, tx_size = item
                     fee_rate = tx_fee // tx_size
                     fee_hist[fee_rate] += tx_size
-                    for hashX, value in itertools.chain(txin_pairs, txout_pairs):
+                    for hashX, value in itertools.chain(txin_pairs,
+                                                        txout_pairs):
                         touched.add(hashX)
                         hashXs[hashX].add(hex_hash)
 
@@ -380,12 +381,12 @@ class MemPool(util.LoggedClass):
         # [fee_(n-1), fee_n)], and fee_(n-1) > fee_n. Fee intervals
         # are chosen so as to create tranches that contain at least
         # 100kb of transactions
-        l = list(reversed(sorted(self.fee_histogram.items())))
+        items = list(reversed(sorted(self.fee_histogram.items())))
         out = []
         size = 0
         r = 0
         binsize = 100000
-        for fee, s in l:
+        for fee, s in items:
             size += s
             if size + r > binsize:
                 out.append((fee, size))
