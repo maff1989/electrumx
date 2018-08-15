@@ -24,6 +24,7 @@ from aiorpcx import run_in_thread
 import electrumx.lib.util as util
 from electrumx.lib.hash import hash_to_hex_str, HASHX_LEN
 from electrumx.lib.merkle import Merkle, MerkleCache
+from electrumx.lib.tx import is_generation
 from electrumx.lib.util import formatted_time
 from electrumx.server.storage import db_class
 from electrumx.server.history import History
@@ -607,6 +608,9 @@ class DB(object):
             for each prevout.
             '''
             def lookup_hashX(tx_hash, tx_idx):
+                # Generation-like UTXO are not present in the DB
+                if is_generation(tx_hash, tx_idx):
+                    return None, None
                 idx_packed = pack('<H', tx_idx)
 
                 # Key: b'h' + compressed_tx_hash + tx_idx + tx_num
