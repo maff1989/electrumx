@@ -33,9 +33,16 @@ from electrumx.lib.hash import sha256, double_sha256, hash_to_hex_str
 from electrumx.lib.util import (
     cachedproperty, unpack_int32_from, unpack_int64_from,
     unpack_uint16_from, unpack_uint32_from, unpack_uint64_from,
-    pack_le_int32, pack_varint, pack_le_uint32, pack_le_uint32, pack_le_int64,
+    pack_le_int32, pack_varint, pack_le_uint32, pack_le_int64,
     pack_varbytes,
 )
+
+# Source: https://github.com/kyuupichan/electrumx/pull/574
+# Credit: erasmospunk
+ZERO = bytes(32)
+MINUS_1 = 4294967295
+def is_generation(tx_hash, tx_idx):
+    return tx_idx == MINUS_1 and tx_hash == ZERO
 
 
 class Tx(namedtuple("Tx", "version inputs outputs locktime")):
@@ -58,14 +65,12 @@ class Tx(namedtuple("Tx", "version inputs outputs locktime")):
 
 class TxInput(namedtuple("TxInput", "prev_hash prev_idx script sequence")):
     '''Class representing a transaction input.'''
-
-    ZERO = bytes(32)
-    MINUS_1 = 4294967295
-
+    
     @cachedproperty
     def is_generation(self):
-        return (self.prev_idx == TxInput.MINUS_1 and
-                self.prev_hash == TxInput.ZERO)
+        # Source: https://github.com/kyuupichan/electrumx/pull/574
+        # Credit: erasmospunk
+        return is_generation(self.prev_hash, self.prev_idx)
 
     def __str__(self):
         script = self.script.hex()
@@ -447,8 +452,7 @@ class TxInputDcr(namedtuple("TxInput", "prev_hash prev_idx tree sequence")):
 
     @cachedproperty
     def is_generation(self):
-        return (self.prev_idx == TxInput.MINUS_1 and
-                self.prev_hash == TxInput.ZERO)
+        return is_generation(self.prev_hash, self.prev_idx)
 
     def __str__(self):
         prev_hash = hash_to_hex_str(self.prev_hash)
